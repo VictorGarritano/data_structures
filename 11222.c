@@ -76,6 +76,8 @@ int main(){
 
     liberaMatriz(amigo,10001);
     liberaMatriz(resolvido,10001);
+    amigo = NULL;
+    resolvido = NULL;
     return 0;
 }
 
