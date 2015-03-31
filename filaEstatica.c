@@ -12,7 +12,6 @@ int remove_FO();
 int insere_FI(int k);
 int filacheia();
 int filavazia();
-int overflow();
 
 int main()
 {
@@ -39,10 +38,10 @@ int main()
     insere_FI(5);
     remove_FO();
 
-    printf("O elemento do início é: %d\n", vetor[inicio]);
-    printf("O índice do início: %d", inicio);
-    printf("\nO índice do fim: %d\n", fim);
-    printf("O número de elementos é: %d\n", nelem);
+    printf("O elemento do inÃ­cio Ã©: %d\n", vetor[inicio]);
+    printf("O Ã­ndice do inÃ­cio: %d", inicio);
+    printf("\nO Ã­ndice do fim: %d\n", fim);
+    printf("O nÃºmero de elementos Ã©: %d\n", nelem);
 
     free(vetor);
 
@@ -66,7 +65,7 @@ int remove_FO() {
 
 int insere_FI(int k) {
     if (filacheia()) {
-        printf("A fila está cheia!\n");
+        printf("A fila estÃ¡ cheia!\n");
     return 0;
     }
     vetor[fim] = k;
