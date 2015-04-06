@@ -15,6 +15,7 @@ struct lista{
 
 typedef struct lista Lista;
 
+//Prototipos das funcoes
 
 struct aluno cria_aluno(struct aluno a);
 Lista* cria_lista();
@@ -194,4 +195,3 @@ int consulta_lista_mat(Lista* li, int mat, struct aluno *al) {
     *al = li->dados[i];
     return 1;
 }
-

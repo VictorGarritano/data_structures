@@ -2,10 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define TAM 2000
 
 int *vetor;
-int nelem;
+int nelem, TAM;
 int* init(int* v);
 FILE *arq;
 void insere(int* v, int x);
@@ -23,13 +22,13 @@ int main()
     vetor = init(vetor);
     short int i;
     srand((unsigned)time(NULL));
-    for (i = 0; i < 1000; i++) insere(vetor, rand() % 1000);
+    for (i = 0; i < TAM; i++) insere(vetor, rand() % 1000);
     printf("Vetor desordenado: \n");
     imprime(vetor);
     mergesort(0,nelem,vetor);
     printf("\nVetor ordenado utilizando o Mergesort: \n");
     imprime(vetor);
-    grava();
+//    grava();
     printf("\nO vetor tem %d elementos", nelem);
     free(vetor);
 
@@ -37,6 +36,7 @@ int main()
 }
 
 int* init(int* v) {
+    scanf("%d", &TAM);
     v =(int*) malloc(sizeof(int) * TAM);
     nelem = 0;
     return v;
