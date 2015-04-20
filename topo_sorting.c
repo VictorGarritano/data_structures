@@ -13,6 +13,7 @@ no* vizinhosDeSaida;
 no* init(no* lista);
 void insere(no* lista, int vertice, int chave);
 //void imprime(no* lista);
+void libera(no* lista);
 
 int main(void) {
     scanf("%d %d", &TAM, &aresta);
@@ -59,6 +60,11 @@ int main(void) {
     for(i = 0; i < k; i ++) {
         printf("%d ", saida[i]);
     }
+
+    libera(vizinhosDeEntrada);
+    libera(vizinhosDeSaida);
+    vizinhosDeEntrada = NULL;
+    vizinhosDeSaida = NULL;
 
     return 0;
 }
@@ -111,3 +117,16 @@ void insere(no* lista,int vertice, int chave) {
 //        printf("\n");
 //    }
 //}
+
+void libera(no* lista) {
+    int i;
+    for(i = 0; i <= TAM; i ++) {
+        no* atual = lista[i].prox;
+        while(atual != NULL) {
+            no* prox = atual->prox;
+            free(atual);
+            atual = prox;
+        }
+    }
+    free(lista);
+}
