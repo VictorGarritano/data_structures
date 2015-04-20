@@ -52,6 +52,7 @@ int main(void) {
                 vizinhosDeEntrada[i].chave = -1;
                 k++;
                 objeto--;
+                free(aux);
             }
         }
    }
