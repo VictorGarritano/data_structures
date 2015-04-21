@@ -12,7 +12,6 @@ no* vizinhosDeSaida;
 
 no* init(no* lista);
 void insere(no* lista, int vertice, int chave);
-//void imprime(no* lista);
 void libera(no* lista);
 
 int main(void) {
@@ -34,29 +33,36 @@ int main(void) {
         insere(vizinhosDeEntrada,vertice,key);
         insere(vizinhosDeSaida,key,vertice);
     }
-
-//  imprime(vizinhosDeEntrada);
-//  printf("\n");
-//  imprime(vizinhosDeSaida);
-
     int objeto = TAM;
-    while(objeto != 0) {
         for(i = 1; i < TAM + 1; i ++) {
             if(vizinhosDeEntrada[i].chave == 0) {
                 no* aux = vizinhosDeSaida[i].prox;
-                    while(aux != NULL) {
-                        vizinhosDeEntrada[aux->chave].chave--;
-                        aux = aux->prox;
-                    }
                 saida[k] = i;
                 vizinhosDeEntrada[i].chave = -1;
                 k++;
                 objeto--;
-                free(aux);
+                while(aux != NULL) {
+                    vizinhosDeEntrada[aux->chave].chave--;
+                    aux = aux->prox;
+                }
             }
         }
-   }
-
+    
+    while(objeto != 0) {
+        for(i = 1; i < TAM + 1; i ++) {
+            if(vizinhosDeEntrada[i].chave == 0) {
+                no* aux = vizinhosDeSaida[i].prox;
+                saida[k] = i;
+                vizinhosDeEntrada[i].chave = -1;
+                k++;
+                objeto--;
+                while(aux != NULL) {
+                    vizinhosDeEntrada[aux->chave].chave--;
+                    aux = aux->prox;
+                }
+            }
+        }
+    }
 
     for(i = 0; i < k; i ++) {
         printf("%d ", saida[i]);
@@ -102,22 +108,6 @@ void insere(no* lista,int vertice, int chave) {
     }
     lista[vertice].chave++;
 }
-
-//void imprime(no* lista) {
-//    int i;
-//    no* tmp;
-//
-//    for(i = 1; i< TAM + 1; i ++) {
-//        tmp = lista[i].prox;
-//        printf("%2d: (%d) ==> ", i, lista[i].chave);
-//        while (tmp != NULL) {
-//        printf("%d  ", tmp->chave);
-//        tmp = tmp->prox;
-//    }
-//
-//        printf("\n");
-//    }
-//}
 
 void libera(no* lista) {
     int i;
