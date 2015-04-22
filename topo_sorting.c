@@ -48,6 +48,9 @@ int main(void) {
             }
         }
     
+/* Roda em tempo O(n^2 + m): 
+n * T("encontrar a fonte") + m(nº de arestas)...
+*/
     while(objeto != 0) {
         for(i = 1; i < TAM + 1; i ++) {
             if(vizinhosDeEntrada[i].chave == 0) {
