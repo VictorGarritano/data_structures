@@ -99,11 +99,9 @@ void insere(no* lista,int vertice, int chave) {
     aux = (no*) malloc(sizeof(no));
     aux->prox= NULL;
     aux->chave = chave;
-    no* fim;
 
     if(lista[vertice].prox == NULL) {
         lista[vertice].prox = aux;
-        fim->prox = aux;
     }
 
     else {
