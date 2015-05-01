@@ -6,7 +6,7 @@ typedef struct _NO {
     struct _NO* prox;
 } no;
 
-int TAM, aresta, vertice, key;
+int TAM, aresta, key;
 no* vizinhosDeEntrada;
 no* vizinhosDeSaida;
 
@@ -29,11 +29,24 @@ int main(void) {
         printf("Erro na criacao da lista de saida!!!\n");
         exit(EXIT_FAILURE);
     }
-    for(i = 1; i < aresta + 1; i ++) {
-        scanf("%d %d",&vertice, &key);
-        insere(vizinhosDeEntrada,vertice,key);
-        insere(vizinhosDeSaida,key,vertice);
+    char *buffer;
+    char string[1000];
+    
+    for(i = 0; i < TAM; i++) {
+        fgets(string, sizeof(string), stdin);
+        buffer = strtok (string," ");
+        while(buffer != NULL) {
+            if(sscanf(buffer, " %d", &key) == -1)
+                printf("Nenhuma tarefa depende da tarefa %d.\n", i + 1);
+            else {
+                printf("A tarefa %d depende da tarefa %d.\n", key, i + 1);
+                insere(vizinhosDeSaida, i + 1, key);
+                insere(vizinhosDeEntrada, key, i + 1);
+            }
+            buffer = strtok (NULL, " ");
+        }
     }
+    free(buffer);
 /*
 Roda em O(n + m):
 ->Esse não precisa percorrer a lista inteira para encontrar uma nova fonte...
@@ -63,12 +76,12 @@ Roda em O(n + m):
 
 ->Imprime a lista de fontes
 
-    no* temp = vizinhosDeEntrada[0].prox;
-    while(temp != NULL) {
-        printf("%d ", temp->chave);
-        temp = temp->prox;
+    aux1 = vizinhosDeEntrada[0].prox;
+    while(aux1 != NULL) {
+        printf("%d ", aux1->chave);
+        aux1 = aux1->prox;
     }
-    free(temp);
+    free(aux1);
 
 */
 
