@@ -49,6 +49,7 @@ int main(void) {
 
     for(i = 1; i < TAM + 1; i ++) {
         if(vizinhosDeEntrada[i].chave == 0) {
+            //Inicia a lista encadeada de fontes, que será armazenada em vizinhosDeEntrada[0]
             insere(vizinhosDeEntrada, 0, i);
         }
     }
@@ -67,6 +68,7 @@ int main(void) {
         aux1 = aux1->prox;
     }
     
+    //Imprime uma ordenação topológica possível
     aux1 = vizinhosDeEntrada[0].prox;
     while(aux1 != NULL) {
         printf("%d ", aux1->chave);
