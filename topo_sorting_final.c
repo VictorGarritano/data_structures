@@ -71,7 +71,7 @@ int main(void) {
     //Imprime uma ordenação topológica possível
     aux1 = vizinhosDeEntrada[0].prox;
     while(aux1 != NULL) {
-        printf("%d ", aux1->chave);
+        printf("%d\n", aux1->chave);
         aux1 = aux1->prox;
     }
     free(aux1);
