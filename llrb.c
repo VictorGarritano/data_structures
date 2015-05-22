@@ -120,7 +120,7 @@ no* recolore(no* h) {
 void preOrdem(no* raiz) {
 
     if(raiz != NULL) {
-        printf("%d%c\n", raiz->chave, raiz->cor);
+        printf("%d %c\n", raiz->chave, raiz->cor);
         preOrdem(raiz->esq);
         preOrdem(raiz->dir);
     }
