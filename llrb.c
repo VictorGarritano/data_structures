@@ -36,6 +36,8 @@ int main(void) {
             raiz = insereLL(raiz, chave);
         }
     }
+    
+    libera(raiz);
 
     return 0;
 }
