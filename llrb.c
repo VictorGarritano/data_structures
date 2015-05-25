@@ -1,6 +1,5 @@
-#include<stdio.h>
-#include<stdlib.h>
-
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct _NO
 {
@@ -21,19 +20,22 @@ void preOrdem(no* raiz);
 void libera(no* raiz);
 
 no* raiz;
+char string[1000];
+char comando;
+int chave;
 
 int main(void) {
 
     raiz = NULL;
-    raiz = insereLL(raiz, 1);
-    raiz = insereLL(raiz, 2);
-    raiz = insereLL(raiz, 3);
-    raiz = insereLL(raiz, 4);
-    raiz = insereLL(raiz, 5);
-    raiz = insereLL(raiz, 6);
 
-    preOrdem(raiz);
-    libera(raiz);
+    while(fgets(string, sizeof(string), stdin) != NULL) {
+        sscanf(string, "%c %d", &comando, &chave);
+        if(comando == 'p')
+            preOrdem(raiz);
+        else if(comando == 'i') {
+            raiz = insereLL(raiz, chave);
+        }
+    }
 
     return 0;
 }
