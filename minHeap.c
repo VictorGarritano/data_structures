@@ -19,7 +19,7 @@ void insere(int chave);
 void troca(no *n1, no *n2);
 void heapify(int i);
 void deleta();
-void deletaMinHeap();
+void liberaMinHeap();
 void percorrePorNivel();
 int achaMin();
 
@@ -39,9 +39,12 @@ int main(void)
             insere(chave);
         else if(comando == 'd')
             deleta();
+        else if(comando == 'f') {
+            liberaMinHeap();
+            exit(0);
+        }
     }
 
-	deletaMinHeap();
 	return 0;
 }
 
@@ -97,9 +100,6 @@ void deleta() {
 	}
 }
 
-void deletaMinHeap() {
-	free(heap.elem);
-}
 
 void percorrePorNivel() {
 	int i;
@@ -111,4 +111,8 @@ void percorrePorNivel() {
 
 int achaMin() {
 	return heap.elem[0].chave;
+}
+
+void liberaMinHeap() {
+    free(heap.elem);
 }
