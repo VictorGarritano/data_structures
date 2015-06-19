@@ -24,20 +24,23 @@ void percorrePorNivel();
 int achaMin();
 
 minHeap heap;
+char string[1000], comando;
+int chave;
 
 int main(void)
 {
 	heap = init();
-	insere(95);
-	insere(60);
-	insere(78);
-	insere(39);
-	insere(28);
-	insere(66);
-	insere(70);
-	insere(33);
-	insere(18);
-	percorrePorNivel();
+
+	while(fgets(string, sizeof(string), stdin) != NULL) {
+        sscanf(string, "%c %d", &comando, &chave);
+        if(comando == 'p')
+            percorrePorNivel();
+        else if(comando == 'i')
+            insere(chave);
+        else if(comando == 'd')
+            deleta();
+    }
+
 	deletaMinHeap();
 	return 0;
 }
@@ -67,9 +70,9 @@ void insere(int chave) {
 }
 
 void troca(no *n1, no *n2) {
-	no* temp = n1;
-	n1 = n2;
-	n2 = temp;
+	no temp = *n1;
+	*n1 = *n2;
+	*n2 = temp;
 }
 
 void heapify(int i) {
@@ -103,6 +106,7 @@ void percorrePorNivel() {
 	for(i = 0; i < heap.tamanho; i++) {
 		printf("%d ", heap.elem[i].chave);
 	}
+		printf("\n");
 }
 
 int achaMin() {
