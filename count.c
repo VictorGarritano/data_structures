@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h>
 
 //Constantes para o count-min
 #define D 5
 #define MOD 127
+#define INT_MAX 2147483647
 #define min(a,b) a < b ? a : b
 
 //Macros para a heap
@@ -33,19 +33,51 @@ int achaMin();
 
 //Funcoes para o count-min
 void inicializaCMS();
-void inicializaHashes();
 void incrementa(int x);
 int estimaFrequencia(int x);
-int hash(int x, int i);
-int mod(int x);
+int hash(int x);
 
 minHeap heap;
-int cms[D][MOD];
-int a[D], b[D];
 
-int main(int argc, char const *argv[])
+int cms[D][MOD];
+
+int main(int argc, char *argv[])
 {
-	/* code */
+	int count = 0, n, flag = 0;
+	if(argc != 3) {
+		printf("Erro!");
+		exit(0);
+	}
+
+	int k = atoi(argv[2]);
+	//Inicializando as estruturas
+	heap = init();
+	inicializaCMS();
+
+	while(scanf("%d ", &n) != EOF) {
+		count++;
+       	incrementa(n);
+       	int freq = estimaFrequencia(n);
+       	if(count < k) continue;
+       	else if(freq >= count/k) {
+       		int j;
+       		for(j = 0; j < heap.tamanho; j++) {
+           		if(heap.tamanho && estimaFrequencia(heap.elem[j].chave) < count/k) {
+               		deleta();
+           		}
+       		}
+           	int i;
+           	for(i = 0; i < heap.tamanho; i ++) {
+           		if(heap.elem[i].chave == n) {
+           			flag = 1;
+           		}
+           }
+           	if(!flag) insere(n);
+       	}
+   	}
+   	percorrePorNivel();
+    liberaMinHeap();
+
 	return 0;
 }
 
@@ -130,26 +162,15 @@ void inicializaCMS() {
     }
 }
 
-void inicializaHashes() {
-    int i;
-    for(i = 0; i < D; i++) {
-        a[i] = rand() % MOD;
-        b[i] = rand() % MOD;
-    }
+int hash(int x) {
+    return (67 * x + 7919) % MOD;
 }
 
-int hash(int x, int i) {
-    return mod((a[i] * x + b[i]));
-}
-
-int mod(int x) {
-    (x = x % MOD) > 0 ? x : x + MOD;
-}
 
 void incrementa(int x) {
     int i;
     for(i = 0; i < D; i++) {
-        cms[i][hash(x,i)]++;
+        cms[i][hash(x)]++;
     }
 }
 
@@ -157,7 +178,7 @@ int estimaFrequencia(int x) {
     int minimo = INT_MAX;
     int i;
     for(i = 0; i < D; i ++) {
-        minimo = min(minimo, cms[i][hash(x, i)]);
+        minimo = min(minimo, cms[i][hash(x)]);
     }
     return minimo;
 }
