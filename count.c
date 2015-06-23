@@ -14,6 +14,7 @@
 
 typedef struct _NO {
 	int chave;
+	int frequencia;
 } no;
 
 typedef struct _MIN_HEAP {
@@ -23,7 +24,7 @@ typedef struct _MIN_HEAP {
 
 //Funcoes para a heap
 minHeap init();
-void insere(int chave);
+void insere(no node);
 void troca(no *n1, no *n2);
 void heapify(int i);
 void deleta();
@@ -58,23 +59,26 @@ int main(int argc, char *argv[])
 		count++;
        	incrementa(n);
        	int freq = estimaFrequencia(n);
-       	if(count < k) continue;
+       	no node;
+       	if(count < k) {
+
+       	}
        	else if(freq >= count/k) {
-       		int j;
-       		for(j = 0; j < heap.tamanho; j++) {
-           		if(heap.tamanho && estimaFrequencia(heap.elem[j].chave) < count/k) {
-               		deleta();
-           		}
+       		node.chave = n;
+       		node.frequencia = freq;
+       		if(heap.tamanho && estimaFrequencia(achaMin()) < count/k) {
+       			deleta();
        		}
            	int i;
            	for(i = 0; i < heap.tamanho; i ++) {
            		if(heap.elem[i].chave == n) {
            			flag = 1;
            		}
-           }
-           	if(!flag) insere(n);
+           	}
+           	if(!flag) insere(node);
        	}
    	}
+   	
    	percorrePorNivel();
     liberaMinHeap();
 
@@ -87,19 +91,16 @@ minHeap init() {
 	return heap;
 }
 
-void insere(int chave) {
+void insere(no node) {
 	//Alocando espaço
 	if(heap.tamanho)
 		heap.elem = realloc(heap.elem, (heap.tamanho + 1) * sizeof(no));
 	else {
 		heap.elem = malloc(sizeof(no));
 	}
-	//Inicializando no com a chave
-	no node;
-	node.chave = chave;
 	//Posicionando o novo no na posicao correta
 	int i = (heap.tamanho)++;
-	while(i && node.chave < heap.elem[PAI(i)].chave) {
+	while(i && node.chave < heap.elem[PAI(i)].frequencia) {
 		heap.elem[i] = heap.elem[PAI(i)];
 		i = PAI(i);
 	}
@@ -113,8 +114,8 @@ void troca(no *n1, no *n2) {
 }
 
 void heapify(int i) {
-	int menor = (FILHOESQ(i) < heap.tamanho && heap.elem[FILHOESQ(i)].chave < heap.elem[i].chave) ? FILHOESQ(i) : i;
-	if (FILHODIR(i) < heap.tamanho && heap.elem[FILHODIR(i)].chave < heap.elem[menor].chave) {
+	int menor = (FILHOESQ(i) < heap.tamanho && heap.elem[FILHOESQ(i)].frequencia < heap.elem[i].frequencia) ? FILHOESQ(i) : i;
+	if (FILHODIR(i) < heap.tamanho && heap.elem[FILHODIR(i)].chave < heap.elem[menor].frequencia) {
 		menor = FILHODIR(i);
 	}
 	if(menor != i) {
