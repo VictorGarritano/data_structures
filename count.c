@@ -36,7 +36,7 @@ int achaMin();
 void inicializaCMS();
 void incrementa(int x);
 int estimaFrequencia(int x);
-int hash(int x);
+int hash(int x, int i);
 
 minHeap heap;
 
@@ -163,15 +163,15 @@ void inicializaCMS() {
     }
 }
 
-int hash(int x) {
-    return (67 * x + 7919) % MOD;
+int hash(int x, int i) {
+    return ((i + 67) * x + 7919) % MOD;
 }
 
 
 void incrementa(int x) {
     int i;
     for(i = 0; i < D; i++) {
-        cms[i][hash(x)]++;
+        cms[i][hash(x, i)]++;
     }
 }
 
@@ -179,7 +179,7 @@ int estimaFrequencia(int x) {
     int minimo = INT_MAX;
     int i;
     for(i = 0; i < D; i ++) {
-        minimo = min(minimo, cms[i][hash(x)]);
+        minimo = min(minimo, cms[i][hash(x, i)]);
     }
     return minimo;
 }
