@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 	inicializaCMS();
 
 	while(scanf("%d ", &n) != EOF) {
-		count++;
+	count++;
        	incrementa(n);
        	int freq = estimaFrequencia(n);
        	no node;
